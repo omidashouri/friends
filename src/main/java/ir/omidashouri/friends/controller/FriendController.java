@@ -2,9 +2,13 @@ package ir.omidashouri.friends.controller;
 
 import ir.omidashouri.friends.model.Friend;
 import ir.omidashouri.friends.service.FriendService;
+import ir.omidashouri.friends.util.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.ValidationException;
 import java.util.Optional;
 
 @RestController
@@ -18,9 +22,13 @@ public class FriendController {
     }
 
     @PostMapping("/friend")
-    Friend create(@RequestBody Friend friend){
-        return friendService.save(friend);
+    Friend create(@RequestBody Friend friend) throws ValidationException {
+        if(friend.getId() !=0 && friend.getFirstName() != null && friend.getLastName() != null)
+            return friendService.save(friend);
+        else
+            throw  new ValidationException("friend cannot be created");
     }
+
 
     @GetMapping("/friend")
     Iterable<Friend> read(){
@@ -28,8 +36,11 @@ public class FriendController {
     }
 
     @PutMapping("/friend")
-    Friend update(@RequestBody Friend friend){
-        return friendService.save(friend);
+    ResponseEntity<Friend> update(@RequestBody Friend friend){
+        if(friendService.findById(friend.getId()).isPresent())
+            return new ResponseEntity<>(friendService.save(friend), HttpStatus.OK);
+        else
+            return new ResponseEntity<>(friend,HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/friend/{id}")
