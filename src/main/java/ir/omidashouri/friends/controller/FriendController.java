@@ -3,13 +3,19 @@ package ir.omidashouri.friends.controller;
 import ir.omidashouri.friends.model.Friend;
 import ir.omidashouri.friends.service.FriendService;
 import ir.omidashouri.friends.util.ErrorMessage;
+import ir.omidashouri.friends.util.FieldErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class FriendController {
@@ -21,14 +27,30 @@ public class FriendController {
         this.friendService = friendService;
     }
 
-    @PostMapping("/friend")
-    Friend create(@RequestBody Friend friend) throws ValidationException {
+    @PostMapping("/friend1")
+    Friend create1(@RequestBody Friend friend) throws ValidationException {
         if(friend.getId() !=0 && friend.getFirstName() != null && friend.getLastName() != null)
             return friendService.save(friend);
         else
             throw  new ValidationException("friend cannot be created");
     }
 
+
+    @PostMapping("/friend")
+    Friend create(@Valid @RequestBody Friend friend)  {
+            return friendService.save(friend);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    List<FieldErrorMessage> exceptionHandler(MethodArgumentNotValidException e){
+        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        List<FieldErrorMessage> fieldErrorMessages = fieldErrors
+                                                        .stream()
+                                                        .map(fieldError -> new FieldErrorMessage(fieldError.getField(),fieldError.getDefaultMessage()))
+                                                        .collect(Collectors.toList());
+        return fieldErrorMessages;
+    }
 
     @GetMapping("/friend")
     Iterable<Friend> read(){
