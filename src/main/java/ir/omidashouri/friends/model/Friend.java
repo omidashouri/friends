@@ -1,7 +1,6 @@
 package ir.omidashouri.friends.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -17,14 +16,21 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class Friend {
-/*
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator="friend_seq")
-    @SequenceGenerator(
-            name="friend_seq",
-            sequenceName="friend_sequence",
-            allocationSize=20
-    )*/
+
+
+    public Friend(@NotBlank String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    /*
+        @Id
+        @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator="friend_seq")
+        @SequenceGenerator(
+                name="friend_seq",
+                sequenceName="friend_sequence",
+                allocationSize=20
+        )*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -40,7 +46,7 @@ public class Friend {
 
     int age;
 
-    @JsonIgnore
+//    @JsonIgnore
     boolean married;
 
 

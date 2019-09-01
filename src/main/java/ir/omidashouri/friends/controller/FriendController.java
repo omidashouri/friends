@@ -2,7 +2,6 @@ package ir.omidashouri.friends.controller;
 
 import ir.omidashouri.friends.model.Friend;
 import ir.omidashouri.friends.service.FriendService;
-import ir.omidashouri.friends.util.ErrorMessage;
 import ir.omidashouri.friends.util.FieldErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 @RestController
 public class FriendController {
@@ -37,7 +37,7 @@ public class FriendController {
 
 
     @PostMapping("/friend")
-    Friend create(@Valid @RequestBody Friend friend)  {
+    public Friend create(@Valid @RequestBody Friend friend)  {
             return friendService.save(friend);
     }
 
@@ -53,7 +53,7 @@ public class FriendController {
     }
 
     @GetMapping("/friend")
-    Iterable<Friend> read(){
+    public Iterable<Friend> read(){
         return friendService.findAll();
     }
 
@@ -66,7 +66,7 @@ public class FriendController {
     }
 
     @DeleteMapping("/friend/{id}")
-    void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id){
         friendService.deleteById(id);
     }
 
@@ -91,7 +91,16 @@ public class FriendController {
     }
 
 
+    @GetMapping("/wrong")
+    public Friend somethingIsWrong() throws Exception{
+        throw new ValidationException("something is wrong");
+    }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ValidationException.class)
+    String exceptionHandler(ValidationException e){
+        return e.getMessage();
+    }
 
 
 }
