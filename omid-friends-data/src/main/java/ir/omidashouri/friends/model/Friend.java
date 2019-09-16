@@ -59,6 +59,6 @@ public class Friend extends BaseEntity{
     //to connect to friend in address pojo
     @JsonManagedReference
     @OneToMany(mappedBy = "friend",cascade = CascadeType.ALL)*/
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     List<Address> addresses;
 }
