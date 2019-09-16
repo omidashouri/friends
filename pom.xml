@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ir.omidashouri</groupId>
-    <artifactId>friends</artifactId>
+    <artifactId>omid-friends</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>friends</name>
+    <name>omid-friends</name>
     <description>friends project in getting started with rest plural sight</description>
 
     <properties>
