@@ -1,8 +1,7 @@
 package ir.omidashouri.friends.bootstrap;
 
 import ir.omidashouri.friends.model.Friend;
-import ir.omidashouri.friends.service.FriendService;
-import org.springframework.beans.factory.annotation.Autowired;
+import ir.omidashouri.friends.service.FriendServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +10,17 @@ import java.util.stream.StreamSupport;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final FriendService friendService;
+    private final FriendServiceImpl friendServiceImpl;
 
-    @Autowired
-    public DataLoader(FriendService friendService) {
-        this.friendService = friendService;
+
+    public DataLoader(FriendServiceImpl friendServiceImpl) {
+        this.friendServiceImpl = friendServiceImpl;
     }
 
     @Override
     public void run(String... args) throws Exception {
 
-        long count = StreamSupport.stream(friendService.findAll().spliterator(),false).count();
+        long count = StreamSupport.stream(friendServiceImpl.getAllFriends().spliterator(),false).count();
 
         if (count == 0 ){
             loadData();
@@ -51,11 +50,11 @@ public class DataLoader implements CommandLineRunner {
         friend2.setAge(30);
         friend2.setMarried(false);
 
-        friendService.save(friend);
+        friendServiceImpl.saveFriendAndReturnDTO(friend);
 
-        friendService.save(friend1);
+        friendServiceImpl.saveFriendAndReturnDTO(friend1);
 
-        friendService.save(friend2);
+        friendServiceImpl.saveFriendAndReturnDTO(friend2);
 
         System.out.println("Loaded Vets....");
 

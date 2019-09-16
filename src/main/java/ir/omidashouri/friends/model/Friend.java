@@ -8,15 +8,23 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
-@Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Builder
-public class Friend {
+@Entity
+@Table(name = "Tbl_Friend")
+public class Friend extends BaseEntity{
 
+
+
+
+    @Builder
+    public Friend(Long id, @NotBlank String firstName, String lastName) {
+        super(id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Friend(@NotBlank String firstName, String lastName) {
         this.firstName = firstName;
@@ -31,9 +39,6 @@ public class Friend {
                 sequenceName="friend_sequence",
                 allocationSize=20
         )*/
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
 
     @NotBlank
     @JsonProperty("first-name")

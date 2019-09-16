@@ -1,24 +1,25 @@
 package ir.omidashouri.friends.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.hibernate.annotations.GeneratorType;
-import org.hibernate.annotations.ManyToAny;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@Data
-@AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Builder
+@AllArgsConstructor
 @Entity
-public class Address {
+@Table(name = "Tbl_Address")
+public class Address extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+
+    @Builder
+    public Address(Long id, String street, String city) {
+        super(id);
+        this.street = street;
+        this.city = city;
+    }
 
     private String street;
 

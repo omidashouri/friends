@@ -1,33 +1,32 @@
-package ir.omidashouri.friends.controller;
+package ir.omidashouri.friends.controller.v1;
 
+import ir.omidashouri.friends.api.v1.model.FriendDTO;
 import ir.omidashouri.friends.model.Friend;
-import ir.omidashouri.friends.service.FriendService;
+import ir.omidashouri.friends.service.FriendServiceImpl;
 import ir.omidashouri.friends.util.FieldErrorMessage;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
 @RestController
 public class FriendController {
 
-    FriendService friendService;
+    FriendServiceImpl friendServiceImpl;
 
-    @Autowired
-    public FriendController(FriendService friendService) {
-        this.friendService = friendService;
+    public FriendController(FriendServiceImpl friendServiceImpl) {
+        this.friendServiceImpl = friendServiceImpl;
     }
 
-    @PostMapping("/friend1")
+/*    @PostMapping("/friend1")
     Friend create1(@RequestBody Friend friend) throws ValidationException {
         if(friend.getId() !=0 && friend.getFirstName() != null && friend.getLastName() != null)
             return friendService.save(friend);
@@ -39,7 +38,7 @@ public class FriendController {
     @PostMapping("/friend")
     public Friend create(@Valid @RequestBody Friend friend)  {
             return friendService.save(friend);
-    }
+    }*/
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -53,11 +52,23 @@ public class FriendController {
     }
 
     @GetMapping("/friend")
-    public Iterable<Friend> read(){
-        return friendService.findAll();
+    public List<FriendDTO> read(){
+        return friendServiceImpl.getAllFriends();
     }
 
-    @PutMapping("/friend")
+    /**
+     * Refactor
+     * @return
+     */
+/*    @GetMapping("v1/friend")
+    public ResponseEntity<FriendListDTO> getAllFriends(){
+        return new ResponseEntity<FriendListDTO>(
+                new FriendListDTO(friendService.findAll(),HttpStatus.OK);
+        );
+    }*/
+
+
+/*    @PutMapping("/friend")
     ResponseEntity<Friend> update(@RequestBody Friend friend){
         if(friendService.findById(friend.getId()).isPresent())
             return new ResponseEntity<>(friendService.save(friend), HttpStatus.OK);
@@ -88,7 +99,7 @@ public class FriendController {
             return friendService.findByLastName(lastName);
         else
             return friendService.findAll();
-    }
+    }*/
 
 
     @GetMapping("/wrong")
