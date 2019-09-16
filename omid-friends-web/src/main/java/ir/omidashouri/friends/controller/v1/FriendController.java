@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.xml.bind.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,11 +34,11 @@ public class FriendController {
             throw  new ValidationException("friend cannot be created");
     }
 
-
+*/
     @PostMapping("/friend")
-    public Friend create(@Valid @RequestBody Friend friend)  {
-            return friendService.save(friend);
-    }*/
+    public FriendDTO create(@Valid @RequestBody Friend friend)  {
+            return friendServiceImpl.saveFriendAndReturnDTO(friend);
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
