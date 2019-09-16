@@ -3,7 +3,10 @@ package ir.omidashouri.friends.controller;
 
 import ir.omidashouri.friends.util.ErrorMessage;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.xml.bind.ValidationException;
 

@@ -2,7 +2,6 @@ package ir.omidashouri.friends;
 
 import ir.omidashouri.friends.model.Friend;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
@@ -13,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 @ExtendWith(MockitoExtension.class)
         public class SystemTests {
 
-    //    in this test application should be RUNNING
+    //    in this test application s<!--:> add to solve exception avax.validation.constraints   -->hould be RUNNING
 
 /*    @Autowired
     RestTemplate restTemplate;
@@ -21,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
     @Autowired
     Friend friend;*/
 
-    @Test
+//    @Test
     public void testCreateReloadDelete(){
 
         RestTemplate restTemplate = new RestTemplate();

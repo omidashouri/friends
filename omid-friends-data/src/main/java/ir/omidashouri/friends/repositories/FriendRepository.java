@@ -1,4 +1,4 @@
-package ir.omidashouri.friends.controller.repositories;
+package ir.omidashouri.friends.repositories;
 
 import ir.omidashouri.friends.model.Friend;
 import org.springframework.data.jpa.repository.JpaRepository;

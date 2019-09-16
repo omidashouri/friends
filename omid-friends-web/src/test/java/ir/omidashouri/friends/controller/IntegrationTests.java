@@ -1,6 +1,6 @@
 package ir.omidashouri.friends.controller;
 
-import ir.omidashouri.friends.FriendsApplication;
+import ir.omidashouri.FriendsApplication;
 import ir.omidashouri.friends.controller.v1.FriendController;
 import ir.omidashouri.friends.model.Friend;
 import org.junit.jupiter.api.Test;

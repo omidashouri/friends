@@ -1,7 +1,7 @@
 package ir.omidashouri.friends.service;
 
 import ir.omidashouri.friends.api.v1.mapper.AddressMapper;
-import ir.omidashouri.friends.controller.repositories.AddressRepository;
+import ir.omidashouri.friends.repositories.AddressRepository;
 import org.springframework.stereotype.Service;
 
 @Service

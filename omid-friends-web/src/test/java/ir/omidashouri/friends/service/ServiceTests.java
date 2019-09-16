@@ -1,7 +1,6 @@
 package ir.omidashouri.friends.service;
 
 import ir.omidashouri.friends.model.Friend;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -15,7 +14,7 @@ public class ServiceTests {
     @Autowired
     FriendService friendService;
 
-    @Test
+//    @Test
     public void testCreateReadDelete(){
         Friend friend = new Friend("omidService","ashouriService");
 

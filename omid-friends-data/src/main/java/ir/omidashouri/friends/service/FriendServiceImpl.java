@@ -2,8 +2,8 @@ package ir.omidashouri.friends.service;
 
 import ir.omidashouri.friends.api.v1.mapper.FriendMapper;
 import ir.omidashouri.friends.api.v1.model.FriendDTO;
-import ir.omidashouri.friends.controller.repositories.FriendRepository;
 import ir.omidashouri.friends.model.Friend;
+import ir.omidashouri.friends.repositories.FriendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
