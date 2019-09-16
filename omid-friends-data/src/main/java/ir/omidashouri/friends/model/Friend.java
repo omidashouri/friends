@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Tbl_Friend")
+@Table(name = "Tbl_Friend",schema = "friends")
 public class Friend extends BaseEntity{
 
 

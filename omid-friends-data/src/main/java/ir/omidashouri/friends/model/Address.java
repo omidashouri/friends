@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Tbl_Address")
+@Table(name = "Tbl_Address",schema = "friends")
 public class Address extends BaseEntity{
 
 

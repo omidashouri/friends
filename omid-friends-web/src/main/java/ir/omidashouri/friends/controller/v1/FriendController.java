@@ -4,6 +4,7 @@ import ir.omidashouri.friends.api.v1.model.FriendDTO;
 import ir.omidashouri.friends.model.Friend;
 import ir.omidashouri.friends.service.FriendServiceImpl;
 import ir.omidashouri.friends.util.FieldErrorMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,6 +23,7 @@ public class FriendController {
 
     FriendServiceImpl friendServiceImpl;
 
+    @Autowired
     public FriendController(FriendServiceImpl friendServiceImpl) {
         this.friendServiceImpl = friendServiceImpl;
     }
